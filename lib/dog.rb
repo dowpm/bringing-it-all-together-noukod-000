@@ -54,8 +54,8 @@ class Dog
     new(id: id, name:name, breed:breed)
   end
 
-  def self.find_or_create_by **attr 
-    sql = <<-SQL 
+  def self.find_or_create_by **attr
+    sql = <<-SQL
     SELECT * FROM dogs WHERE name = ? AND breed = ?
     SQL
 
