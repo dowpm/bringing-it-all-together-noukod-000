@@ -50,7 +50,8 @@ class Dog
     SELECT * FROM dogs
     WHERE id = ?
     SQL
-    new(*DB[:conn].execute(sql,id)[0])
+    id, name, breed = *DB[:conn].execute(sql,id)[0]
+    new(id: id, name:name, breed:breed)
   end
 
 end
