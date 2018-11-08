@@ -54,4 +54,19 @@ class Dog
     new(id: id, name:name, breed:breed)
   end
 
+  def self.find_or_create_by **attr 
+    sql = <<-SQL 
+    SELECT * FROM dogs WHERE name = ? AND breed = ?
+    SQL
+
+    result = DB[:conn].execute(sql,attr[:name],attr[:breed])[0]
+
+    if result
+      id, name, breed = *result
+      new(id:id, name:name, breed:breed)
+    else
+      create name:attr[:name], breed:attr[:breed]
+    end
+  end
+
 end
